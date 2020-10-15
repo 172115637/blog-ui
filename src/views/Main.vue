@@ -1,5 +1,5 @@
 <template>
-    <div id="main">
+    <div id="main" v-loading="loading">
         <div class="table-header">
             <span>名称</span>
             <span>创建时间</span>
@@ -54,11 +54,13 @@
                 },
                 keyword: "",
                 articleList: [],
-                typeId: null
+                typeId: null,
+                loading: false
             }
         },
         methods: {
             getArticleList() {
+                this.loading = true
                 this.$service.articleList({
                     page: this.page.page,
                     limit: this.page.limit,
@@ -66,6 +68,7 @@
                     typeId: this.typeId
                 }).then(res => {
                     if (res.data.code === 0) {
+                        this.loading = false
                         this.articleList = res.data.data
                         this.page = {
                             page: res.data.page,
