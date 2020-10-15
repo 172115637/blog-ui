@@ -25,7 +25,10 @@
         </ul>
 
         <div class="bottom-bar">
-            <input type="text" placeholder="按文章标题或内容搜索..." class="query" v-model="keyword" @change="getArticleList()">
+            <div>
+                <input type="text" placeholder="按文章标题或内容搜索..." class="query" v-model="keyword">
+                <el-button type="primary" icon="el-icon-search" @click="getArticleList()">搜索</el-button>
+            </div>
             <div class="paginataion-container">
                 <el-pagination
                         @size-change="handleSizeChange"
@@ -245,18 +248,20 @@
         .bottom-bar {
             padding: 0 .8rem;
             border-top: 1px solid #eee;
-            display: flex;
             align-items: center;
             position fixed;
             bottom 0;
             height 70px
-            width 100%
+            left 200px;
+            right 0;
             z-index 999
             background-color #fff;
+            display flex;
+            justify-content space-between
+            box-sizing border-box
 
             .query {
-                flex 1;
-                height: 16px;
+                height: 9px;
                 border-radius: 3px;
                 padding: 15px 30px 15px 15px;
                 border: 1px solid #eee;
@@ -268,12 +273,9 @@
             }
 
             .paginataion-container {
-                flex 2;
                 align-items: center;
                 height: 38px;
-                justify-content: space-around;
                 -webkit-box-align: center;
-                display flex
             }
         }
     }
