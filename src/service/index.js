@@ -51,5 +51,14 @@ export default {
                 'Authorization': util.getCookie("token")
             }
         })
+    },
+    uploadImg(file) {
+        let formData = new FormData();
+        formData.append('file', file);
+        return axios.post("/upload/imgs", formData, {
+            headers: {
+                'Authorization': util.getCookie("token")
+            }
+        })
     }
 };

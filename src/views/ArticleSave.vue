@@ -23,7 +23,7 @@
                 <el-button type="info" @click="$router.replace({path:'/home/main'})">放弃</el-button>
             </el-form-item>
         </el-form>
-        <mavon-editor :toolbars="markdownOption" v-model="form.content" :ishljs="true"/>
+        <mavon-editor ref="md" @imgAdd="$imgAdd" :toolbars="markdownOption" v-model="form.content" :ishljs="true"/>
 
         <el-dialog
                 title="请填写文章类别名称"
@@ -199,6 +199,23 @@
                     }
                 }))
 
+            },
+            $imgAdd(pos, file) {
+                this.$service.uploadImg(file).then(res => {
+                    if (res.data.code === 0) {
+                        this.$message({
+                            message: '上传成功',
+                            type: 'success'
+                        });
+                        this.$refs.md.$img2Url(pos, res.data.data[0]);
+                    } else {
+                        this.$notify.error({
+                            title: '错误',
+                            message: res.data.msg
+                        });
+                    }
+
+                })
             }
         },
         created() {
