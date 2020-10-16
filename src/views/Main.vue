@@ -11,12 +11,12 @@
                     <li>{{article.typeName}}</li>
                     <ul class="opera" v-if="$store.state.isAdmin">
                         <li>
-                            <el-button size="small" type="success"
-                                       @click="$router.replace({path:'/home/article_save?id='+article.articleId})">修改
+                            <el-button size="small" type="success" plain icon="el-icon-edit" circle
+                                       @click="$router.replace({path:'/home/article_save?id='+article.articleId})">
                             </el-button>
                         </li>
                         <li>
-                            <el-button size="small" type="danger" @click="delArticle(article.articleId)">删除</el-button>
+                            <el-button size="small" circle plain icon="el-icon-delete"  type="danger" @click="delArticle(article.articleId)"></el-button>
                         </li>
                     </ul>
                 </ul>

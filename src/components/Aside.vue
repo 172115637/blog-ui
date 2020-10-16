@@ -19,6 +19,9 @@
         </ul>
         <div class="qq-group">
             <el-button v-if="$store.state.isAdmin" type="primary" size="mini" style="margin-bottom: 10px;"
+                       @click="logout()">注销
+            </el-button>
+            <el-button v-if="$store.state.isAdmin" type="primary" size="mini" style="margin-bottom: 10px;"
                        @click="$router.replace({path:'/home/article_save'})">创建文章
             </el-button>
             <span>我的QQ</span>
@@ -32,6 +35,8 @@
 </template>
 
 <script>
+    import store from "../store";
+
     export default {
         name: "Aside",
         data() {
@@ -49,6 +54,10 @@
             },
             go(url) {
                 window.location = url;
+            },
+            logout() {
+                store.commit('setIsAdmin', false)
+                sessionStorage.clear();
             }
         },
         created() {

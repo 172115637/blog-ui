@@ -23,6 +23,8 @@
 
 <script>
     import cookieUtil from "../utils/cookieUtil";
+    import service from "../service";
+    import store from "../store";
 
     export default {
         name: "Login",
@@ -59,7 +61,12 @@
                             type: 'success'
                         });
                         cookieUtil.setCookie("token", res.data.data.token)
-                        this.$router.replace({path: "/"})
+                        this.$service.isAdmin().then(res => {
+                            if (res.data.code === 0) {
+                                store.commit('setIsAdmin', res.data.data)
+                                this.$router.replace({path: "/"})
+                            }
+                        })
                     } else {
                         this.$notify.error({
                             title: '错误',
