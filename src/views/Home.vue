@@ -1,18 +1,19 @@
 <template>
     <div id="home">
-        <el-container>
-            <el-aside>
+        <div class="container">
+            <div class="aside">
                 <Aside/>
-            </el-aside>
-            <el-container>
-                <el-header v-if="!showHeader()">
+            </div>
+            <div class="content-box">
+                <div class="header" v-if="!showHeader()">
                     <Header/>
-                </el-header>
-                <el-main>
+                </div>
+                <div class="main">
                     <router-view/>
-                </el-main>
-            </el-container>
-        </el-container>
+                </div>
+
+            </div>
+        </div>
     </div>
 </template>
 
@@ -34,7 +35,7 @@
             },
             showHeader() {
                 let path = this.$route.path;
-                return path.includes('/home/article') || path.includes('/home/article_save')
+                return path.includes('/home/article') || path.includes('/home/article_save')  || path.includes("/home/about")
             }
         }
     }
@@ -45,22 +46,31 @@
         width 100%;
         height 100%;
 
-        .el-container {
+        .container {
             width 100%;
             height 100%;
+            display flex;
 
-            .el-header {
-                height auto !important;
-                padding 0 !important;
+            .header {
+                height auto;
+                padding 0;
             }
 
-            .el-aside {
+            .aside {
                 width 200px !important;
             }
 
-            .el-main {
+            .content-box {
                 padding 0
                 position relative;
+                flex 1;
+                display flex
+                flex-direction column
+                .main{
+                    width 100%;
+                    flex 1;
+                    overflow auto;
+                }
             }
         }
     }

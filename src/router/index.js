@@ -11,6 +11,11 @@ const routes = [
         redirect: "/home/main"
     },
     {
+        path: '/about',
+        name: 'about',
+        redirect: "/home/about"
+    },
+    {
         path: '/home',
         name: 'Home',
         component: Home,
@@ -36,6 +41,13 @@ const routes = [
                     return import(/* webpackChunkName: "about" */ '../views/ArticleSave.vue')
                 }
             },
+            {
+                path: 'about',
+                name: 'about',
+                component: function () {
+                    return import(/* webpackChunkName: "about" */ '../views/About.vue')
+                }
+            }
         ]
     },
     {

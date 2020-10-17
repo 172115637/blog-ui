@@ -12,10 +12,10 @@
                      @click="go(user.weiboUrl)"></li>
         </ul>
         <ul class="menu">
-            <li class="selected-menu">
+            <li :class="this.$route.path==='/home/main'?'selected-menu':''">
                 <router-link to="/home/main">个人博客</router-link>
             </li>
-            <li><a href="/">关于我</a></li>
+            <li :class="this.$route.path==='/home/about'?'selected-menu':''"><router-link to="/about">关于我</router-link></li>
         </ul>
         <div class="qq-group">
             <el-button v-if="$store.state.isAdmin" type="primary" size="mini" style="margin-bottom: 10px;"

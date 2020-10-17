@@ -1,8 +1,10 @@
 <template>
-    <div id="article-save">
+    <div id="article-save"  v-loading="loading"  element-loading-text="拼命加载中"
+         element-loading-spinner="el-icon-loading"
+         element-loading-background="rgba(0, 0, 0, 0.8)">
         <el-form ref="form" :inline="true" :model="form" label-width="80px"
                  style="display: flex;align-items: center;justify-content: space-between;margin-top: 15px;">
-            <div>
+            <el-row class="form-box">
                 <el-form-item label="文字标题">
                     <el-input v-model="form.title"></el-input>
                 </el-form-item>
@@ -16,14 +18,14 @@
                         </el-option>
                     </el-select>
                 </el-form-item>
-            </div>
-            <el-form-item>
-                <el-button type="primary" @click="dialogVisible=true">创建类别</el-button>
-                <el-button type="success" @click="save()">立即发布</el-button>
-                <el-button type="info" @click="$router.replace({path:'/home/main'})">放弃</el-button>
-            </el-form-item>
+                <el-form-item>
+                    <el-button type="primary" @click="dialogVisible=true">创建类别</el-button>
+                    <el-button type="success" @click="save()">立即发布</el-button>
+                    <el-button type="info" @click="$router.replace({path:'/home/main'})">放弃</el-button>
+                </el-form-item>
+            </el-row>
         </el-form>
-        <mavon-editor ref="md" @imgAdd="$imgAdd" :toolbars="markdownOption" v-model="form.content" :ishljs="true"/>
+        <mavon-editor v-model="value"/>
 
         <el-dialog
                 title="请填写文章类别名称"
@@ -88,7 +90,8 @@
                 },
                 dialogVisible: false,
                 articleTypeList: [],
-                typeName: ""
+                typeName: "",
+                loading: false
             }
         },
         methods: {
@@ -200,7 +203,8 @@
                 }))
 
             },
-            $imgAdd(pos, file) {
+            imgAdd(pos, file) {
+                this.loading = true;
                 this.$service.uploadImg(file).then(res => {
                     if (res.data.code === 0) {
                         this.$message({
@@ -208,7 +212,9 @@
                             type: 'success'
                         });
                         this.$refs.md.$img2Url(pos, res.data.data[0]);
+                        this.loading = false;
                     } else {
+                        this.loading = false;
                         this.$notify.error({
                             title: '错误',
                             message: res.data.msg
@@ -225,6 +231,21 @@
     }
 </script>
 
-<style scoped>
+<style lang="stylus">
+    #article-save {
+        position relative
+        width 100%;
+        height 100%
+        display flex;
+        flex-direction column;
 
+        .form-box {
+            padding 5px;
+            width 100%;
+        }
+
+        .markdown-body {
+            flex 1
+        }
+    }
 </style>

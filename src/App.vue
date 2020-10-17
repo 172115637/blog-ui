@@ -18,6 +18,7 @@
         position relative;
         padding 0;
         margin 0;
+        min-width 1200px;
     }
     #app{
         width 100%;

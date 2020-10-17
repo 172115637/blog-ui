@@ -16,7 +16,8 @@
                             </el-button>
                         </li>
                         <li>
-                            <el-button size="small" circle plain icon="el-icon-delete"  type="danger" @click="delArticle(article.articleId)"></el-button>
+                            <el-button size="small" circle plain icon="el-icon-delete" type="danger"
+                                       @click="delArticle(article.articleId)"></el-button>
                         </li>
                     </ul>
                 </ul>
@@ -25,7 +26,7 @@
         </ul>
 
         <div class="bottom-bar">
-            <div>
+            <div class="search">
                 <input type="text" placeholder="按文章标题或内容搜索..." class="query" v-model="keyword">
                 <el-button type="primary" icon="el-icon-search" @click="getArticleList()">搜索</el-button>
             </div>

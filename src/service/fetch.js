@@ -3,7 +3,7 @@ import router from "../router";
 import Element from "element-ui";
 
 let config = {
-    baseURL: "http://localhost:8080/api", // api的base_url
+    baseURL: "http://47.113.95.146:9000/api", // api的base_url
     timeout: 3 * 60 * 1000, // 请求超时时间
     withCredentials: true,
     headers: {
